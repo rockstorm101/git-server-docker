@@ -1,5 +1,5 @@
 # Git Server Docker
-[![GitHub Workflow Status][4]][5]
+[![GitHub Workflow Status][4]][6]
 [![Docker Image Size][5]][6]
 
 This is a simple Docker image containing a Git server accessible via
@@ -126,5 +126,5 @@ scratch.
 [3]: https://github.com/jkarlosb/git-server-docker
 
 [4]: https://img.shields.io/github/workflow/status/rockstorm101/git-server-docker/Build%20Docker%20Images
-[5]: https://img.shields.io/docker/image-size/rockstorm/git-server/latest)
+[5]: https://img.shields.io/docker/image-size/rockstorm/git-server/latest
 [6]: https://hub.docker.com/r/rockstorm/git-server
