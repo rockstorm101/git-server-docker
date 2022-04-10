@@ -62,7 +62,7 @@ git clone git@example.com:2222/srv/git/project/repository.git
 By setting the environment variable `REPOSITORIES_HOME_LINK` to
 e.g. `/srv/git/project` a link will be created into the git user home
 directory so that your git URLs don't require the repository absolute
-path:
+path[^1]:
 
 ```
 git clone git@example.com:project/repository.git
@@ -75,7 +75,6 @@ environment:
   REPOSITORIES_HOME_LINK: /srv/git
 ```
 
-Ref. https://stackoverflow.com/a/39841058
 
 To avoid specifying ports on git URLs you can configure your client
 machine by adding the following to your `~/.ssh/config` file:
@@ -125,6 +124,9 @@ Re-implementation heavily based on [jkarlosb's][3] but coded from
 scratch.
 
 [3]: https://github.com/jkarlosb/git-server-docker
+
+[^1]: More information and different options are discussed at
+    https://stackoverflow.com/a/39841058.
 
 [4]: https://img.shields.io/github/workflow/status/rockstorm101/git-server-docker/Build%20Docker%20Images
 [5]: https://img.shields.io/docker/image-size/rockstorm/git-server/latest
