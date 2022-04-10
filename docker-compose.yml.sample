@@ -4,7 +4,7 @@ services:
   git-server:
     image: rockstorm/git-server
     container_name: git-server
-    restart: unless_stopped
+    restart: unless-stopped
 
     # environment:
       # Setting this variable creates a link in the git user directory
