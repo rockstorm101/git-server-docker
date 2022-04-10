@@ -25,9 +25,9 @@ to interact with the server. These are set in the docker-compose.yml
 file as:
 
 ```yml
-    volumes:
-      - /path/to/your/repos:/srv/git
-      - /path/to/authorized_keys:/home/git/.ssh/authorized_keys:ro
+volumes:
+  - /path/to/your/repos:/srv/git
+  - /path/to/authorized_keys:/home/git/.ssh/authorized_keys:ro
 ```
 
 ### Custom SSH Host Keys
@@ -45,10 +45,10 @@ keys with these ones. This would look like the following on your
 docker-compose.yml file:
 
 ```yml
-    environment:
-      SSH_HOST_KEYS_PATH: /tmp/host-keys
-    volumes:
-      - /path/to/host-keys:/tmp/host-keys:ro
+environment:
+  SSH_HOST_KEYS_PATH: /tmp/host-keys
+volumes:
+  - /path/to/host-keys:/tmp/host-keys:ro
 ```
 
 ### Enable Git URLs Without Absolute Path
@@ -71,8 +71,8 @@ git clone git@example.com:project/repository.git
 To configure this on your docker-compose.yml file:
 
 ```yml
-    environment:
-      REPOSITORIES_HOME_LINK: /srv/git
+environment:
+  REPOSITORIES_HOME_LINK: /srv/git
 ```
 
 Ref. https://stackoverflow.com/a/39841058
@@ -88,6 +88,7 @@ Host my-server
 ```
 
 This way your git URLs would look like:
+
 ```
 git clone my-server:project/repository.git
 ```
@@ -98,8 +99,8 @@ To apply your own custom SSH daemon configuration simply mount your
 `sshd_config` onto the container like:
 
 ```yml
-    volumes:
-      - ./sshd_config.sample:/etc/ssh/sshd_config:ro
+volumes:
+  - ./sshd_config.sample:/etc/ssh/sshd_config:ro
 ```
 
 ## License
