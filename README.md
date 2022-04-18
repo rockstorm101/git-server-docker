@@ -79,7 +79,7 @@ container to load the password from.
 docker run --detach \
   --name git-server \
   --volume /path/to/your/repos:/srv/git \
-  --volume /path/to/password/file:/run/secrets/git_password \
+  --volume /path/to/password/file:/run/secrets/git_password:ro \
   --env GIT_PASSWORD_FILE=/run/secrets/git_password \
   --publish 2222:22 \
   rockstorm/git-server
