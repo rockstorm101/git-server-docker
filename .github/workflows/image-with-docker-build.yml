@@ -1,10 +1,9 @@
-name: Build Docker Images
+name: Build Image with Docker-CLI
 
 on:
   push:
     tags:
-      - '*'
-      - '!*docker*'
+      - '*docker*'
 
 jobs:
   build-image:
@@ -19,8 +18,8 @@ jobs:
       uses: docker/metadata-action@v3
       with:
         images: rockstorm/git-server
-        tags: |
-          type=ref,event=tag
+        flavor: latest=false
+        tags: type=ref,event=tag
 
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v1
@@ -39,6 +38,7 @@ jobs:
       with:
         context: .
         platforms: linux/amd64,linux/arm64,linux/arm/v7,linux/arm/v6
+        build-args: EXTRA_PACKAGES="docker-cli=20.10.14-r1"
         push: true
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
