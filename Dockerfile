@@ -1,9 +1,11 @@
 FROM alpine:3.15
 
+ARG EXTRA_PACKAGES=""
 RUN set -eux; \
   apk add --no-cache \
-    openssh \
-    git \
+    git=2.34.2-r0 \
+    openssh=8.8_p1-r1 \
+	$EXTRA_PACKAGES \
   ;
 
 # Generate SSH host keys
