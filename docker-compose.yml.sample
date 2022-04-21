@@ -40,6 +40,9 @@ services:
       # File containing the password for the git user
       # - /path/to/password/file:/run/secrets/git_password:ro
 
+      # Expose the Docker socket to the container
+      # /var/run/docker.sock:/var/run/docker.sock
+
     ports:
       - "2222:22"
 

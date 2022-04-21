@@ -3,7 +3,7 @@
 [![Docker Image Size][5]][6]
 
 This is a simple Docker image containing a Git server accessible via
-SSH.
+SSH. (It can also contain Docker CLI, see [Variants](#variants))
 
 - [Usage](#usage)
   * [Basic Use Case](#basic-use-case)
@@ -15,6 +15,7 @@ SSH.
     + [Allow Both SSH Public Key and Password](#allow-both-ssh-public-key-and-password)
   * [Custom SSH Host Keys](#custom-ssh-host-keys)
   * [Enable Git URLs Without Absolute Path](#enable-git-urls-without-absolute-path)
+- [Variants](#variants)
 - [License](#license)
 - [Credit](#credit)
 
@@ -123,8 +124,11 @@ Second, mount your custom `sshd_config`. Via docker-compose.yml is
 done like:
 
 ```yaml
-volumes:
-  - ./sshd_config.sample:/etc/ssh/sshd_config:ro
+services:
+  git-server:
+    ...
+    volumes:
+      - ./sshd_config.sample:/etc/ssh/sshd_config:ro
 ```
 
 Third, you need to mount the file with SSH authentication keys for
@@ -229,6 +233,32 @@ This way your git URLs would look like:
 git clone my-server:project/repository.git
 ```
 
+## Variants
+
+All images are based on the latest stable image of [Alpine Linux][9].
+
+### `git-server:<version>`
+
+Default image. It contains just git and SSH.
+
+### `git-server:<version>-docker`
+
+This image includes the Docker CLI. With this addition the git server
+will be able to start other containers for things such as running
+CI/CD actions. In this case you would need to expose the host's Docker
+socket to your git server container[^2]. This would look like the
+following on your docker-compose.yml file:
+
+```yaml
+services:
+  git-server:
+    ...
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+```
+
+[9]: https://hub.docker.com/_/alpine
+
 ## License
 
 View [license information][2] for the software contained in this
@@ -252,6 +282,7 @@ scratch.
 
 [^1]: More information and different options are discussed at
     https://stackoverflow.com/a/39841058.
+[^2]: https://jpetazzo.github.io/2015/09/03/do-not-use-docker-in-docker-for-ci/#the-socket-solution
 
 [3]: https://github.com/jkarlosb/git-server-docker
 [4]: https://img.shields.io/github/workflow/status/rockstorm101/git-server-docker/Build%20Docker%20Images
