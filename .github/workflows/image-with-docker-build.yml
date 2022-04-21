@@ -38,7 +38,7 @@ jobs:
       with:
         context: .
         platforms: linux/amd64,linux/arm64,linux/arm/v7,linux/arm/v6
-        build-args: EXTRA_PACKAGES="docker-cli=20.10.14-r1"
+        build-args: EXTRA_PACKAGES=docker-cli=20.10.14-r1
         push: true
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
