@@ -25,6 +25,7 @@ if [ -n "${GIT_PASSWORD_FILE}" ]; then
 fi
 
 # Make the git user the onwer of all repositories
+export GIT_REPOSITORIES_PATH
 if [ -d "${GIT_REPOSITORIES_PATH}" ]; then
     chown -R "${GIT_USER}":"${GIT_GROUP}" "${GIT_REPOSITORIES_PATH}"/.
 else
@@ -56,6 +57,19 @@ if [ -n "${REPOSITORIES_HOME_LINK}" ]; then
         echo "Home link not created."
     fi
 fi
+
+# Add the git user to the group with write access to the docker socket
+docker_socket_path="/var/run/docker.sock"
+if [ -S "${docker_socket_path}" ]; then
+	docker_group="$(stat -c '%G' ${docker_socket_path})"
+	docker_group_id="$(stat -c '%g' ${docker_socket_path})"
+	if [ "${docker_group}" = "UNKNOWN" ]; then
+		docker_group="docker"
+		addgroup -g "${docker_group_id}" "${docker_group}"
+	fi
+	addgroup "${GIT_USER}" "${docker_group}"
+fi
+
 
 # Start the ssh server
 /usr/sbin/sshd -D
