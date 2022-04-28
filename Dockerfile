@@ -1,11 +1,9 @@
-FROM alpine:3.15
+FROM alpine:3.15 AS standard
 
-ARG EXTRA_PACKAGES=""
-RUN set -eux; \
+RUN set -ex; \
     apk add --no-cache \
         git=2.34.2-r0 \
         openssh=8.8_p1-r1 \
-        $EXTRA_PACKAGES \
     ;
 
 # Generate SSH host keys
@@ -44,3 +42,8 @@ COPY setup.sh ${SETUP_FILE}
 EXPOSE 22
 
 CMD ${SETUP_FILE}
+
+
+FROM standard AS docker
+
+RUN set -ex; apk add --no-cache docker-cli=20.10.14-r1
