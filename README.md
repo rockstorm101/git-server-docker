@@ -15,6 +15,8 @@ SSH. (It can also contain Docker CLI, see [Variants](#variants))
     + [Allow Both SSH Public Key and Password](#allow-both-ssh-public-key-and-password)
   * [Custom SSH Host Keys](#custom-ssh-host-keys)
   * [Enable Git URLs Without Absolute Path](#enable-git-urls-without-absolute-path)
+  * [Disable Git User Interactive Login](#disable-git-user-interactive-login)
+  * [Set Git User UID / GID](#set-git-user-uid---gid)
 - [Variants](#variants)
 - [License](#license)
 - [Credit](#credit)
@@ -26,33 +28,32 @@ SSH. (It can also contain Docker CLI, see [Variants](#variants))
 
 ```shell
 docker run --detach \
-  --name rockstorm/git-server \
-  --volume /path/to/your/repos:/srv/git \
+  --name git-server \
+  --volume git-repositories:/srv/git \
   --publish 2222:22 \
   rockstorm/git-server
 ```
 
-One volume is mounted which sets the path to where you git
-repositories are stored. Your server should be accessible on port 2222
-via:
+Your server should be accessible on port 2222 via:
 
 ```
 git clone ssh://git@localhost:2222/srv/git/your-repo.git
 ```
 
-The default password for the git user is `12345`. By default, the git
-user is only allowed to clone, push and pull repositories.
-
+The default password for the git user is `12345`.
 
 #### Create a New Repository
 
-On the host, run the following commands and restart the git server:
+Log into the server:
 
+```shell
+ssh git@localhost -p 2222
 ```
-cd /path/to/your/repos
-mkdir your-repo.git
-cd your-repo.git
-git init --bare
+
+Create and initialise a repository:
+```
+mkdir /srv/git/your-repo.git
+git-init --bare /srv/git/your-repo.git
 ```
 
 
@@ -65,7 +66,7 @@ set for the git user. You can set your own password using the
 ```shell
 docker run --detach \
   --name git-server \
-  --volume /path/to/your/repos:/srv/git \
+  --volume git-repositories:/srv/git \
   --env GIT_PASSWORD=your-password \
   --publish 2222:22 \
   rockstorm/git-server
@@ -79,7 +80,7 @@ container to load the password from.
 ```shell
 docker run --detach \
   --name git-server \
-  --volume /path/to/your/repos:/srv/git \
+  --volume git-repositories:/srv/git \
   --volume /path/to/password/file:/run/secrets/git_password:ro \
   --env GIT_PASSWORD_FILE=/run/secrets/git_password \
   --publish 2222:22 \
@@ -231,6 +232,42 @@ This way your git URLs would look like:
 
 ```
 git clone my-server:project/repository.git
+```
+
+### Disable Git User Interactive Login
+
+To disable the interactive SSH login for the git user and limit it to
+only git clone, push and pull actions, mount a file onto
+`/home/git/git-shell-commands/no-interactive-login`. This file must be
+executable. When the git user attempts to login, this file is run and
+the interactive shell is aborted. This is set in the
+docker-compose.yml file as:
+
+```yaml
+services:
+  git-server:
+    ...
+    volumes:
+      - /executable/file:/home/git/git-shell-commands/no-interactive-login:ro
+```
+
+### Set Git User UID / GID
+
+The variables `GIT_USER_UID` and `GIT_USER_GID` allow you to customise
+the UID and GID of the git user inside the container. This could be
+useful if the host is administered by a non-root user and you would
+like the git user to have the same UID (This would allow not having to
+restart the container to reset file permissions on files created by a
+host user). If `GIT_USER_UID` is defined but `GIT_USER_GID` isn't, the
+latter is assumed to be equal to the first. To configure this on your
+docker-compose.yml file:
+
+```yaml
+services:
+  git-server:
+    ...
+    environment:
+      GIT_USER_UID: 1001
 ```
 
 ## Variants

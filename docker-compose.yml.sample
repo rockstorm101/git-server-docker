@@ -23,8 +23,8 @@ services:
       # SSH_HOST_KEYS_PATH: /tmp/host-keys
 
       # Set specific UID and GID for the git user
-	  # - GIT_USER_UID: 1001
-	  # - GIT_USER_GID: 1001
+      # - GIT_USER_UID: 1001
+      # - GIT_USER_GID: 1001
 
     volumes:
       # Folder with git repositories
@@ -48,7 +48,7 @@ services:
       # - /var/run/docker.sock:/var/run/docker.sock
 
       # Disable interactive SSH login for the git user
-	  # - /executable/file:/home/git/git-shell-commands/no-interactive-login:ro
+      # - /executable/file:/home/git/git-shell-commands/no-interactive-login:ro
 
     ports:
       - "2222:22"
