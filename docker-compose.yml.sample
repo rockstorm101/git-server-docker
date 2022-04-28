@@ -22,12 +22,16 @@ services:
       # in order to replace the default keys
       # SSH_HOST_KEYS_PATH: /tmp/host-keys
 
+      # Set specific UID and GID for the git user
+	  # - GIT_USER_UID: 1001
+	  # - GIT_USER_GID: 1001
+
     volumes:
       # Folder with git repositories
-      - /path/to/your/repos:/srv/git
+      - git-repositories:/srv/git
 
       # File containing the SSH keys of clients that will be allowed
-      # to use this service though a public key
+      # to use this service through a public key
       # - /path/to/authorized_keys:/home/git/.ssh/authorized_keys:ro
 
       # A folder with host ssh keys to use instead of the default ones
@@ -41,7 +45,10 @@ services:
       # - /path/to/password/file:/run/secrets/git_password:ro
 
       # Expose the Docker socket to the container
-      # /var/run/docker.sock:/var/run/docker.sock
+      # - /var/run/docker.sock:/var/run/docker.sock
+
+      # Disable interactive SSH login for the git user
+	  # - /executable/file:/home/git/git-shell-commands/no-interactive-login:ro
 
     ports:
       - "2222:22"
@@ -49,7 +56,7 @@ services:
 # Use Docker secrets to provide the git password file instead of mounting
 #     secrets:
 #       - git_password
-
+#
 # secrets:
 #   git_password:
 #     file: /path/to/password/file
