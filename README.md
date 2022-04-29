@@ -285,7 +285,7 @@ Default image. It contains just git and SSH.
 
 This image includes the Docker CLI. With this addition the git server
 will be able to start other containers for things such as running
-CI/CD actions. In this case you would need to expose the host's Docker
+CI/CD actions. In this case you would need to mount the host's Docker
 socket to your git server container[^2]. This would look like the
 following on your docker-compose.yml file:
 
@@ -315,12 +315,15 @@ relevant licenses for all software contained within.
 
 [8]: https://github.com/rockstorm101/git-server-docker/blob/master/LICENSE
 
-## Credit
+## Credits
 
 Re-implementation heavily based on [jkarlosb's][9] but coded from
 scratch.
 
+Table of contents on this README was generated with [markdown-toc][10].
+
 [9]: https://github.com/jkarlosb/git-server-docker
+[10]: http://ecotrust-canada.github.io/markdown-toc
 
 
 [^1]: More information and different options are discussed at
