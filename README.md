@@ -19,7 +19,7 @@ SSH. (It can also contain Docker CLI, see [Variants](#variants))
   * [Set Git User UID / GID](#set-git-user-uid---gid)
 - [Variants](#variants)
 - [License](#license)
-- [Credit](#credit)
+- [Credits](#credits)
 
 [1]: https://img.shields.io/github/workflow/status/rockstorm101/git-server-docker/Build%20Docker%20Images
 [3]: https://img.shields.io/docker/image-size/rockstorm/git-server/latest
