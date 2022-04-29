@@ -53,6 +53,9 @@ services:
     ports:
       - "2222:22"
 
+volumes:
+  git-repositories:
+
 # Use Docker secrets to provide the git password file instead of mounting
 #     secrets:
 #       - git_password
