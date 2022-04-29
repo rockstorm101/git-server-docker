@@ -1,6 +1,6 @@
 # Git Server Docker
-[![GitHub Workflow Status][4]][6]
-[![Docker Image Size][5]][6]
+[![GitHub Workflow Status][1]][2]
+[![Docker Image Size][3]][2]
 
 This is a simple Docker image containing a Git server accessible via
 SSH. (It can also contain Docker CLI, see [Variants](#variants))
@@ -21,6 +21,9 @@ SSH. (It can also contain Docker CLI, see [Variants](#variants))
 - [License](#license)
 - [Credit](#credit)
 
+[1]: https://img.shields.io/github/workflow/status/rockstorm101/git-server-docker/Build%20Docker%20Images
+[3]: https://img.shields.io/docker/image-size/rockstorm/git-server/latest
+[2]: https://hub.docker.com/r/rockstorm/git-server
 
 ## Usage
 
@@ -105,17 +108,17 @@ secrets:
 
 ## Advanced configuration
 
-A [sample `docker-compose.yml`][1] is provided with all available
+A [sample `docker-compose.yml`][4] is provided with all available
 options to use with docker-compose.
 
-[1]: https://github.com/rockstorm101/git-server-docker/blob/master/docker-compose.yml.sample
+[4]: https://github.com/rockstorm101/git-server-docker/blob/master/docker-compose.yml.sample
 
 ### Use SSH public keys
 
 The most secure option is to disable clear text passwords completely
 and only allow connections via SSH public keys.
 
-First, Set to 'no' the following option on the [sample `sshd_config`][7]:
+First, Set to 'no' the following option on the [sample `sshd_config`][5]:
 
 ```
 PasswordAuthentication no
@@ -144,17 +147,17 @@ services:
       - /path/to/authorized_keys:/home/git/.ssh/authorized_keys:ro
 ```
 
-[7]: https://github.com/rockstorm101/git-server-docker/blob/master/sshd_config.sample
+[5]: https://github.com/rockstorm101/git-server-docker/blob/master/sshd_config.sample
 
 #### Create Authorised Keys File
 
 SSH key generation for your client machine to connect to the
-server is detailed in depth on [Git's book Chapter 4.3][8].
+server is detailed in depth on [Git's book Chapter 4.3][6].
 
 Then simply copy the contents of all allowed clients' `id_*.pub` into
 a file and mount it as detailed above.
 
-[8]: https://git-scm.com/book/en/v2/Git-on-the-Server-Generating-Your-SSH-Public-Key
+[6]: https://git-scm.com/book/en/v2/Git-on-the-Server-Generating-Your-SSH-Public-Key
 
 #### Allow Both SSH Public Key and Password
 
@@ -272,7 +275,7 @@ services:
 
 ## Variants
 
-All images are based on the latest stable image of [Alpine Linux][9].
+All images are based on the latest stable image of [Alpine Linux][7].
 
 ### `git-server:<version>`
 
@@ -294,11 +297,11 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
 ```
 
-[9]: https://hub.docker.com/_/alpine
+[7]: https://hub.docker.com/_/alpine
 
 ## License
 
-View [license information][2] for the software contained in this
+View [license information][8] for the software contained in this
 image.
 
 As with all Docker images, these likely also contain other software
@@ -310,18 +313,17 @@ As for any pre-built image usage, it is the image user's
 responsibility to ensure that any use of this image complies with any
 relevant licenses for all software contained within.
 
-[2]: https://github.com/rockstorm101/git-server-docker/blob/master/LICENSE
+[8]: https://github.com/rockstorm101/git-server-docker/blob/master/LICENSE
 
 ## Credit
 
-Re-implementation heavily based on [jkarlosb's][3] but coded from
+Re-implementation heavily based on [jkarlosb's][9] but coded from
 scratch.
+
+[9]: https://github.com/jkarlosb/git-server-docker
+
 
 [^1]: More information and different options are discussed at
     https://stackoverflow.com/a/39841058.
 [^2]: https://jpetazzo.github.io/2015/09/03/do-not-use-docker-in-docker-for-ci/#the-socket-solution
 
-[3]: https://github.com/jkarlosb/git-server-docker
-[4]: https://img.shields.io/github/workflow/status/rockstorm101/git-server-docker/Build%20Docker%20Images
-[5]: https://img.shields.io/docker/image-size/rockstorm/git-server/latest
-[6]: https://hub.docker.com/r/rockstorm/git-server
