@@ -47,13 +47,15 @@ The default password for the git user is `12345`.
 
 #### Create a New Repository
 
-Log into the server:
+Log into the server through SSH. Note the git user is constrained to
+only a handful of commands, enough to list, create, delete, or rename
+repositories, or change repository descriptions:
 
 ```shell
 ssh git@localhost -p 2222
 ```
 
-Create and initialise a repository:
+Create and initialise a repository at `/srv/git`:
 ```
 mkdir /srv/git/your-repo.git
 git-init --bare /srv/git/your-repo.git
