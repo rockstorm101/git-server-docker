@@ -17,7 +17,7 @@ if [ -n "${GIT_USER_UID}" ] && \
     addgroup -g "${GIT_USER_GID}" "${GIT_GROUP}"
     adduser \
         --gecos 'Linux User' \
-        --shell "${GIT_SHELL}" \
+        --shell "$(which git-shell)" \
         --uid "${GIT_USER_UID}" \
         --ingroup "${GIT_GROUP}" \
         --no-create-home \
