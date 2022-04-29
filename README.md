@@ -326,7 +326,12 @@ Table of contents on this README was generated with [markdown-toc][10].
 [10]: http://ecotrust-canada.github.io/markdown-toc
 
 
-[^1]: More information and different options are discussed at
-    https://stackoverflow.com/a/39841058.
-[^2]: https://jpetazzo.github.io/2015/09/03/do-not-use-docker-in-docker-for-ci/#the-socket-solution
+[^1]: How it works and more information are discussed at [SO][11].
+
+[^2]: In depth explanation at [Jérôme Petazzoni's blog][12]. Note that
+    doing this has security implications since the git user will be
+    able to run *any* container on the host.
+
+[11]: https://stackoverflow.com/a/39841058
+[12]: https://jpetazzo.github.io/2015/09/03/do-not-use-docker-in-docker-for-ci/#the-socket-solution
 
