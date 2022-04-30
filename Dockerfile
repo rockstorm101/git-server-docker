@@ -12,8 +12,8 @@ RUN ssh-keygen -A
 # Define variables
 ENV GIT_USER=git \
     GIT_GROUP=git
-ENV GIT_HOME=/home/${GIT_USER} \
-    SSH_AUTHORIZED_KEYS_FILE=${GIT_HOME}/.ssh/authorized_keys \
+ENV GIT_HOME=/home/${GIT_USER}
+ENV SSH_AUTHORIZED_KEYS_FILE=${GIT_HOME}/.ssh/authorized_keys \
     GIT_REPOSITORIES_PATH=/srv/git \
     SETUP_FILE=/sbin/setup
 
