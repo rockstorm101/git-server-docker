@@ -49,9 +49,12 @@ else
     echo "Directory '${GIT_REPOSITORIES_PATH}' not found."
 fi
 
-# Throw a warning if authorized_keys is not found
-if [ ! -f "${SSH_AUTHORIZED_KEYS_FILE}" ]; then
-    echo "File '${SSH_AUTHORIZED_KEYS_FILE}' not found.";
+# Make the git user the owner of his home directory
+# Required by the SSH server to allow public key login
+if [ -f "${SSH_AUTHORIZED_KEYS_FILE}" ]; then
+    chown "${GIT_USER}":"${GIT_GROUP}" "${GIT_HOME}"
+else
+    echo "File '${SSH_AUTHORIZED_KEYS_FILE}' not found."
     echo "No user will be able to log in using a public key."
 fi
 
