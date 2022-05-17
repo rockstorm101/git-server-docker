@@ -46,4 +46,4 @@ CMD ${SETUP_FILE}
 
 FROM standard AS docker
 
-RUN set -ex; apk add --no-cache docker-cli=20.10.14-r1
+RUN set -ex; apk add --no-cache docker-cli=20.10.16-r0
