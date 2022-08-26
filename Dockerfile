@@ -2,8 +2,8 @@ FROM alpine:3.16 AS standard
 
 RUN set -ex; \
     apk add --no-cache \
-        git=2.36.1-r0 \
-        openssh=9.0_p1-r1 \
+        git=2.36.2-r0 \
+        openssh=9.0_p1-r2 \
     ;
 
 # Generate SSH host keys
@@ -46,4 +46,4 @@ CMD ${SETUP_FILE}
 
 FROM standard AS docker
 
-RUN set -ex; apk add --no-cache docker-cli=20.10.16-r0
+RUN set -ex; apk add --no-cache docker-cli=20.10.16-r2
