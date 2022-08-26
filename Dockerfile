@@ -14,8 +14,7 @@ ENV GIT_USER=git \
     GIT_GROUP=git
 ENV GIT_HOME=/home/${GIT_USER}
 ENV SSH_AUTHORIZED_KEYS_FILE=${GIT_HOME}/.ssh/authorized_keys \
-    GIT_REPOSITORIES_PATH=/srv/git \
-    SETUP_FILE=/sbin/setup
+    GIT_REPOSITORIES_PATH=/srv/git
 
 # Create the git user and enable login by assigning a simple password
 # Note that BusyBox implementation of `adduser` differs from Debian's
@@ -37,11 +36,12 @@ RUN set -eux; \
 # Delete Alpine welcome message
 RUN rm /etc/motd
 
-COPY setup.sh ${SETUP_FILE}
+COPY setup.sh /sbin/setup
 
 EXPOSE 22
 
-CMD ${SETUP_FILE}
+ENTRYPOINT ["/sbin/setup"]
+CMD ["/usr/sbin/sshd", "-D"]
 
 
 FROM standard AS docker

@@ -93,4 +93,4 @@ if [ -S "${docker_socket_path}" ]; then
 fi
 
 # Start the ssh server
-/usr/sbin/sshd -D
+exec "$@"
