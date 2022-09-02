@@ -17,6 +17,7 @@ SSH. (It can also contain Docker CLI, see [Variants](#variants))
   * [Enable Git URLs Without Absolute Path](#enable-git-urls-without-absolute-path)
   * [Disable Git User Interactive Login](#disable-git-user-interactive-login)
   * [Set Git User UID / GID](#set-git-user-uid--gid)
+  * [Setup logging](#setup-logging)
 - [Variants](#variants)
 - [License](#license)
 - [Credits](#credits)
@@ -274,6 +275,23 @@ services:
     environment:
       GIT_USER_UID: 1001
 ```
+
+### Setup logging
+
+This image will produce no logs by default. To output logging to
+stderr configure your docker-compose.yml like:
+
+```yaml
+services:
+  git-server:
+    ...
+    command: ["/usr/sbin/sshd", "-D", "-e"]
+```
+
+If you add a custom command, be sure to include `/usr/sbin/sshd -D`
+for the git server to stay in the foreground, otherwise your container
+will stop immediately after starting.
+
 
 ## Variants
 
