@@ -2,7 +2,7 @@ FROM alpine:3.16 AS standard
 
 RUN set -ex; \
     apk add --no-cache \
-        git=2.36.2-r0 \
+        git=2.36.3-r0 \
         openssh=9.0_p1-r2 \
     ;
 
@@ -46,4 +46,4 @@ CMD ["/usr/sbin/sshd", "-D"]
 
 FROM standard AS docker
 
-RUN set -ex; apk add --no-cache docker-cli=20.10.16-r2
+RUN set -ex; apk add --no-cache docker-cli=20.10.20-r0
