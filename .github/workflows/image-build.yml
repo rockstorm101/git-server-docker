@@ -18,6 +18,7 @@ jobs:
       uses: docker/metadata-action@v3
       with:
         images: rockstorm/git-server
+        flavor: latest=false
         tags: |
           type=ref,event=tag
 
