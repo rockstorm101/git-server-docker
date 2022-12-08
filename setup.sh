@@ -79,6 +79,3 @@ if [ -n "${REPOSITORIES_HOME_LINK}" ]; then
         echo "Home link not created."
     fi
 fi
-
-# Start the ssh server
-exec "$@"

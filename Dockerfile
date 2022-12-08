@@ -36,9 +36,14 @@ RUN set -eux; \
 # Delete Alpine welcome message
 RUN rm /etc/motd
 
-COPY setup.sh /sbin/setup
+# Set up entrypoint script and directory
+ENV DOCKER_ENTRYPOINT_DIR=/docker-entrypoint.d
+RUN set -eux; \
+    mkdir ${DOCKER_ENTRYPOINT_DIR}
+COPY docker-entrypoint.sh /
+COPY 10-setup.sh ${DOCKER_ENTRYPOINT_DIR}
 
 EXPOSE 22
 
-ENTRYPOINT ["/sbin/setup"]
+ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["/usr/sbin/sshd", "-D"]
