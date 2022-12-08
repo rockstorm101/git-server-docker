@@ -42,8 +42,3 @@ EXPOSE 22
 
 ENTRYPOINT ["/sbin/setup"]
 CMD ["/usr/sbin/sshd", "-D"]
-
-
-FROM standard AS docker
-
-RUN set -ex; apk add --no-cache docker-cli=20.10.20-r0

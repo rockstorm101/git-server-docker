@@ -80,17 +80,5 @@ if [ -n "${REPOSITORIES_HOME_LINK}" ]; then
     fi
 fi
 
-# Add the git user to the group with write access to the docker socket
-docker_socket_path="/var/run/docker.sock"
-if [ -S "${docker_socket_path}" ]; then
-    docker_group="$(stat -c '%G' ${docker_socket_path})"
-    docker_group_id="$(stat -c '%g' ${docker_socket_path})"
-    if [ "${docker_group}" = "UNKNOWN" ]; then
-        docker_group="docker"
-        addgroup -g "${docker_group_id}" "${docker_group}"
-    fi
-    addgroup "${GIT_USER}" "${docker_group}"
-fi
-
 # Start the ssh server
 exec "$@"
