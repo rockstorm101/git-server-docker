@@ -19,7 +19,10 @@ jobs:
       with:
         images: rockstorm/git-server
         tags: |
-          type=ref,event=tag
+          # production (i.e. 2.36+b1)
+          type=ref,event=tag,priority=600
+          # stable (i.e. 2.36)
+          type=match,pattern=[^\+]+,priority=500
 
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v1
@@ -41,4 +44,3 @@ jobs:
         push: true
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
-        target: standard
