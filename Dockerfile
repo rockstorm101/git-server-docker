@@ -51,4 +51,4 @@ CMD ["/usr/sbin/sshd", "-D"]
 
 FROM standard AS docker
 
-RUN set -ex; apk add --no-cache docker-cli=20.10.20-r0
+RUN set -ex; apk add --no-cache docker-cli=20.10.21-r1
