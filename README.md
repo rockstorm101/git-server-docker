@@ -297,11 +297,11 @@ will stop immediately after starting.
 
 All images are based on the latest stable image of [Alpine Linux][7].
 
-### `git-server:<version>`
+### `git-server:<git-version>`
 
 Default image. It contains just git and SSH.
 
-### `git-server:<version>-docker`
+### `git-server:<git-version>-docker`
 
 This image includes the Docker CLI. With this addition the git server
 will be able to start other containers for things such as running
