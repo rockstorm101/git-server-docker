@@ -1,5 +1,5 @@
 # Git Server Docker
-[![GitHub Workflow Status][1]][2]
+[![Test Build Status][1]][2]
 [![Docker Image Size][3]][2]
 
 This is a simple Docker image containing a Git server accessible via
@@ -23,7 +23,7 @@ SSH. (It can also contain Docker CLI, see [Variants](#variants))
 - [License](#license)
 - [Credits](#credits)
 
-[1]: https://img.shields.io/github/workflow/status/rockstorm101/git-server-docker/Build%20Docker%20Images
+[1]: https://img.shields.io/github/workflow/status/rockstorm101/git-server-docker/Test%20Docker%20Build
 [3]: https://img.shields.io/docker/image-size/rockstorm/git-server/latest
 [2]: https://hub.docker.com/r/rockstorm/git-server
 
