@@ -1,9 +1,9 @@
-FROM alpine:3.16 AS standard
+FROM alpine:3.17 AS standard
 
 RUN set -ex; \
     apk add --no-cache \
-        git=2.36.3-r0 \
-        openssh=9.0_p1-r2 \
+        git=2.38.1-r0 \
+        openssh=9.1_p1-r1 \
     ;
 
 # Generate SSH host keys
@@ -36,11 +36,16 @@ RUN set -eux; \
 # Delete Alpine welcome message
 RUN rm /etc/motd
 
-COPY setup.sh /sbin/setup
+# Set up entrypoint script and directory
+ENV DOCKER_ENTRYPOINT_DIR=/docker-entrypoint.d
+RUN set -eux; \
+    mkdir ${DOCKER_ENTRYPOINT_DIR}
+COPY docker-entrypoint.sh /
+COPY 10-setup.sh ${DOCKER_ENTRYPOINT_DIR}
 
 EXPOSE 22
 
-ENTRYPOINT ["/sbin/setup"]
+ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["/usr/sbin/sshd", "-D"]
 
 

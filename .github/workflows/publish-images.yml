@@ -1,4 +1,4 @@
-name: Build Docker Images
+name: Publish Docker Images
 
 on:
   push:
@@ -15,31 +15,33 @@ jobs:
 
     - name: Set Metadata
       id: meta
-      uses: docker/metadata-action@v3
+      uses: docker/metadata-action@v4
       with:
         images: rockstorm/git-server
         flavor: latest=false
         tags: |
-          type=ref,event=tag
+          # production (i.e. 2.36+b1)
+          type=ref,event=tag,priority=600
+          # stable (i.e. 2.36)
+          type=match,pattern=[^\+]+,priority=500
 
     - name: Set up QEMU
-      uses: docker/setup-qemu-action@v1
+      uses: docker/setup-qemu-action@v2
 
     - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v1
+      uses: docker/setup-buildx-action@v2
 
     - name: Login to DockerHub
-      uses: docker/login-action@v1
+      uses: docker/login-action@v2
       with:
         username: 'rockstorm'
         password: ${{ secrets.DOCKERHUB_TOKEN }}
 
     - name: Build and Push
-      uses: docker/build-push-action@v2
+      uses: docker/build-push-action@v3
       with:
         context: .
         platforms: linux/amd64,linux/arm64,linux/arm/v7,linux/arm/v6
         push: true
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
-        target: standard
