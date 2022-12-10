@@ -19,6 +19,7 @@ SSH. (It can also contain Docker CLI, see [Variants](#variants))
   * [Set Git User UID / GID](#set-git-user-uid--gid)
   * [Setup logging](#setup-logging)
 - [Variants](#variants)
+- [Tagging Scheme](#tagging-scheme)
 - [License](#license)
 - [Credits](#credits)
 
