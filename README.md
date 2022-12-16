@@ -24,7 +24,7 @@ SSH. (It can also contain Docker CLI, see [Variants](#variants))
 - [License](#license)
 - [Credits](#credits)
 
-[1]: https://img.shields.io/github/workflow/status/rockstorm101/git-server-docker/Test%20Docker%20Build
+[1]: https://img.shields.io/github/actions/workflow/status/rockstorm101/git-server-docker/test-build.yml?branch=master
 [2]: https://hub.docker.com/r/rockstorm/git-server
 [3]: https://img.shields.io/docker/image-size/rockstorm/git-server/latest
 [4]: https://img.shields.io/docker/pulls/rockstorm/git-server
