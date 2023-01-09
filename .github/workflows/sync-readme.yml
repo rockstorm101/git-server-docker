@@ -21,4 +21,5 @@ jobs:
         username: 'rockstorm'
         password: ${{ secrets.DOCKERHUB_TOKEN }}
         repository: rockstorm/git-server
+        readme-filepath: ./README-DockerHub.md
         short-description: ${{ github.event.repository.description }}
