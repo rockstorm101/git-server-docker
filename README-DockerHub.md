@@ -73,6 +73,20 @@ services:
 [5]: https://hub.docker.com/_/alpine
 
 
+## Tagging Scheme
+
+ - **'X.Y+bZ'**: Immutable tag. Points to a specific image build and will
+   not be reused.
+
+ - **'X.Y'**: Stable tag for specific Git major and minor versions. It
+   follows the latest build for Git version X.Y and therefore changes
+   on every patch change (i.e. 1.2.3 to 1.2.4), on every change on
+   OpenSSH and every change on the base Alpine image.
+
+ - **'latest'**: This tag follows the very latest build regardless any
+   major/minor versions.
+
+
 ## License
 
 View [license information][6] for the software contained in this
