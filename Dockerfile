@@ -20,7 +20,13 @@ ENV SSH_AUTHORIZED_KEYS_FILE=${GIT_HOME}/.ssh/authorized_keys \
 # Note that BusyBox implementation of `adduser` differs from Debian's
 # and therefore options behave slightly differently
 RUN set -eux; \
-    adduser --disabled-password --shell "$(which git-shell)" "${GIT_USER}"; \
+    addgroup "${GIT_GROUP}"; \
+    adduser \
+        --gecos "Git User" \
+        --ingroup "${GIT_GROUP}" \
+        --disabled-password \
+        --shell "$(which git-shell)" \
+        "${GIT_USER}" ; \
     echo "${GIT_USER}:12345" | chpasswd
 
 # Restrict git user to git commands
@@ -31,7 +37,7 @@ RUN set -eux; \
     cmds="ls mkdir rm vi"; \
     for c in $cmds; do \
         ln -s $(which $c) .; \
-    done;
+    done
 
 # Delete Alpine welcome message
 RUN rm /etc/motd
