@@ -26,7 +26,9 @@ if [ -n "${GIT_USER_UID-}" ]; then
         --no-create-home \
         --disabled-password \
         "${GIT_USER}"
-    echo "${GIT_USER}:12345" | chpasswd
+    if ! tmp=$(echo "${GIT_USER}:12345" | chpasswd 2>&1); then
+        echo "$tmp"; exit 1
+    fi
 fi
 
 # Change password of the git user
