@@ -28,12 +28,8 @@ Simple Docker image containing a Git server accessible via SSH.
 
 ### Basic Use Case
 
-```shell
-docker run --detach \
-  --name git-server \
-  --volume git-repositories:/srv/git \
-  --publish 2222:22 \
-  rockstorm/git-server
+```
+docker run -v git-repositories:/srv/git -p 2222:22 rockstorm/git-server
 ```
 
 Your server should be accessible on port 2222 via:
@@ -44,13 +40,14 @@ git clone ssh://git@localhost:2222/srv/git/your-repo.git
 
 The default password for the git user is `12345`.
 
+
 #### Create a New Repository
 
 Log into the server through SSH. Note the git user is constrained to
 only a handful of commands, enough to list, create, delete, or rename
 repositories, or change repository descriptions:
 
-```shell
+```
 ssh git@localhost -p 2222
 ```
 
