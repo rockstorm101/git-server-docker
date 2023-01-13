@@ -18,6 +18,7 @@ Simple Docker image containing a Git server accessible via SSH.
   * [Disable Git User Interactive Login](#disable-git-user-interactive-login)
   * [Set Git User UID / GID](#set-git-user-uid--gid)
   * [Setup logging](#setup-logging)
+  * [Visualization and HTTP support](#visualization-and-http-support)
 - [Variants](#variants)
 - [Tagging Scheme](#tagging-scheme)
 - [License](#license)
@@ -288,9 +289,35 @@ for the git server to stay in the foreground, otherwise your container
 will stop immediately after starting.
 
 
+### Visualization and HTTP support
+
+To have unauthenticated read access to your repositories through HTTP
+and visualize them you can run a webserver along this image. One
+example of such a webserver is [this GitWeb image][4]. You just need
+to mount the folder/volume with your repositories on both containers
+at the relevant locations.
+
+```yaml
+services:
+  git-server:
+    image: rockstorm/git-server
+    ...
+    volumes:
+      - ./path/to/repos:/srv/git
+
+  gitweb:
+    image: rockstorm/gitweb
+    ...
+    volumes:
+      - ./path/to/repos:/srv/git:ro
+```
+
+[4]: https://github.com/rockstorm101/gitweb-docker
+
+
 ## Variants
 
-All images are based on the latest stable image of [Alpine Linux][4].
+All images are based on the latest stable image of [Alpine Linux][5].
 
 ### `git-server:<git-version>`
 
@@ -312,7 +339,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
 ```
 
-[4]: https://hub.docker.com/_/alpine
+[5]: https://hub.docker.com/_/alpine
 
 
 ## Tagging Scheme
@@ -331,7 +358,7 @@ services:
 
 ## License
 
-View [license information][5] for the software contained in this
+View [license information][6] for the software contained in this
 image.
 
 As with all Docker images, these likely also contain other software
@@ -343,27 +370,27 @@ As for any pre-built image usage, it is the image user's
 responsibility to ensure that any use of this image complies with any
 relevant licenses for all software contained within.
 
-[5]: https://github.com/rockstorm101/git-server-docker/blob/master/LICENSE
+[6]: https://github.com/rockstorm101/git-server-docker/blob/master/LICENSE
 
 ## Credits
 
-Re-implementation heavily based on [jkarlosb's][6] but coded from
+Re-implementation heavily based on [jkarlosb's][7] but coded from
 scratch.
 
-Table of contents on this README was generated with [markdown-toc][7].
+Table of contents on this README was generated with [markdown-toc][8].
 
-[6]: https://github.com/jkarlosb/git-server-docker
-[7]: http://ecotrust-canada.github.io/markdown-toc
+[7]: https://github.com/jkarlosb/git-server-docker
+[8]: http://ecotrust-canada.github.io/markdown-toc
 
 
-[^1]: How it works and more information are discussed at [SO][8].
+[^1]: How it works and more information are discussed at [SO][9].
 
-[^2]: In depth explanation at [Jérôme Petazzoni's blog][9]. Note that
+[^2]: In depth explanation at [Jérôme Petazzoni's blog][10]. Note that
     doing this has security implications since the git user will be
     able to run *any* container on the host.
 
-[8]: https://stackoverflow.com/a/39841058
-[9]: https://jpetazzo.github.io/2015/09/03/do-not-use-docker-in-docker-for-ci/#the-socket-solution
+[9]: https://stackoverflow.com/a/39841058
+[10]: https://jpetazzo.github.io/2015/09/03/do-not-use-docker-in-docker-for-ci/#the-socket-solution
 
 
 [b1]: https://img.shields.io/github/actions/workflow/status/rockstorm101/git-server-docker/test-build.yml?branch=master
