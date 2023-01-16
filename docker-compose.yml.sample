@@ -32,7 +32,7 @@ services:
 
       # File containing the SSH keys of clients that will be allowed
       # to use this service through a public key
-      # - /path/to/authorized_keys:/home/git/.ssh/authorized_keys:ro
+      # - /path/to/authorized_keys:/home/git/.ssh/authorized_keys
 
       # A folder with host ssh keys to use instead of the default ones
       # - /path/to/host-keys:/tmp/host-keys:ro

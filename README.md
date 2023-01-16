@@ -143,7 +143,7 @@ services:
   git-server:
     ...
     volumes:
-      - /path/to/authorized_keys:/home/git/.ssh/authorized_keys:ro
+      - /path/to/authorized_keys:/home/git/.ssh/authorized_keys
 ```
 
 [2]: https://github.com/rockstorm101/git-server-docker/blob/master/sshd_config.sample
