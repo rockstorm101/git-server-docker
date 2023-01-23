@@ -325,26 +325,17 @@ Default image. It contains just git and SSH.
 
 ### `git-server:<git-version>-docker`
 
-This image includes the Docker CLI. With this addition the git server
-will be able to start other containers for things such as running
-CI/CD actions. In this case you would need to mount the host's Docker
-socket to your git server container[^2]. This would look like the
-following on your docker-compose.yml file:
-
-```yaml
-services:
-  git-server:
-    ...
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-```
+This image used to include the Docker CLI. This variant is now
+deprecated in favor of running a CI/CD service separate from this
+image. For example, see [Bash CI Server][6].
 
 [5]: https://hub.docker.com/_/alpine
+[6]: https://github.com/rockstorm101/bash-ci-server
 
 
 ## Tagging Scheme
 
- - **'X.Y+bZ'**: Immutable tag. Points to a specific image build and will
+ - **'X.Y-bZ'**: Immutable tag. Points to a specific image build and will
    not be reused.
 
  - **'X.Y'**: Stable tag for specific Git major and minor versions. It
@@ -358,7 +349,7 @@ services:
 
 ## License
 
-View [license information][6] for the software contained in this
+View [license information][7] for the software contained in this
 image.
 
 As with all Docker images, these likely also contain other software
@@ -370,30 +361,25 @@ As for any pre-built image usage, it is the image user's
 responsibility to ensure that any use of this image complies with any
 relevant licenses for all software contained within.
 
-[6]: https://github.com/rockstorm101/git-server-docker/blob/master/LICENSE
+[7]: https://github.com/rockstorm101/git-server-docker/blob/master/LICENSE
 
 ## Credits
 
-Re-implementation heavily based on [jkarlosb's][7] but coded from
+Re-implementation heavily based on [jkarlosb's][8] but coded from
 scratch.
 
-Table of contents on this README was generated with [markdown-toc][8].
+Table of contents on this README was generated with [markdown-toc][9].
 
-[7]: https://github.com/jkarlosb/git-server-docker
-[8]: http://ecotrust-canada.github.io/markdown-toc
+[8]: https://github.com/jkarlosb/git-server-docker
+[9]: http://ecotrust-canada.github.io/markdown-toc
 
 
-[^1]: How it works and more information are discussed at [SO][9].
+[^1]: How it works and more information are discussed at [SO][10].
 
-[^2]: In depth explanation at [Jérôme Petazzoni's blog][10]. Note that
-    doing this has security implications since the git user will be
-    able to run *any* container on the host.
-
-[9]: https://stackoverflow.com/a/39841058
-[10]: https://jpetazzo.github.io/2015/09/03/do-not-use-docker-in-docker-for-ci/#the-socket-solution
+[10]: https://stackoverflow.com/a/39841058
 
 
 [b1]: https://img.shields.io/github/actions/workflow/status/rockstorm101/git-server-docker/test-build.yml?branch=master
-[b2]: https://img.shields.io/docker/image-size/rockstorm/git-server/latest
+[b2]: https://img.shields.io/docker/image-size/rockstorm/git-server/latest?logo=docker
 [b3]: https://img.shields.io/docker/pulls/rockstorm/git-server
 [bl]: https://hub.docker.com/r/rockstorm/git-server
