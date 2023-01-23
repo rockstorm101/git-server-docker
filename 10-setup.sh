@@ -2,7 +2,7 @@
 
 set -eu
 
-warn() { echo "WARNING: ${1}" >&2; }
+warn() { echo "warning: ${1}" >&2; }
 
 if [ -n "${DEBUG-}" ]; then set -x; fi
 
