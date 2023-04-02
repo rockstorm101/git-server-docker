@@ -110,7 +110,7 @@ secrets:
 A [sample `docker-compose.yml`][1] is provided with all available
 options to use with docker-compose.
 
-[1]: https://github.com/rockstorm101/git-server-docker/blob/master/docker-compose.yml.sample
+[1]: https://github.com/rockstorm101/git-server-docker/blob/master/examples/docker-compose.yml
 
 ### Use SSH public keys
 
@@ -131,7 +131,7 @@ services:
   git-server:
     ...
     volumes:
-      - ./sshd_config.sample:/etc/ssh/sshd_config:ro
+      - ./examples/sshd_config:/etc/ssh/sshd_config:ro
 ```
 
 Third, you need to mount the file with SSH authentication keys for
@@ -146,7 +146,7 @@ services:
       - /path/to/authorized_keys:/home/git/.ssh/authorized_keys
 ```
 
-[2]: https://github.com/rockstorm101/git-server-docker/blob/master/sshd_config.sample
+[2]: https://github.com/rockstorm101/git-server-docker/blob/master/examples/sshd_config
 
 #### Create Authorised Keys File
 
