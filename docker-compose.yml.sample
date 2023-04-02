@@ -48,7 +48,7 @@ services:
       # - /var/run/docker.sock:/var/run/docker.sock
 
       # Disable interactive SSH login for the git user
-      # - /executable/file:/home/git/git-shell-commands/no-interactive-login:ro
+      # - /executable/file:/home/git/git-shell-commands/no-interactive-login
 
     ports:
       - "2222:22"

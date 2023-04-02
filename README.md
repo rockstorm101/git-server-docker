@@ -250,7 +250,7 @@ services:
   git-server:
     ...
     volumes:
-      - /executable/file:/home/git/git-shell-commands/no-interactive-login:ro
+      - /executable/file:/home/git/git-shell-commands/no-interactive-login
 ```
 
 ### Set Git User UID / GID
