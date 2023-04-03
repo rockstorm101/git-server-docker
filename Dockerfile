@@ -1,4 +1,4 @@
-FROM alpine:3.17 AS standard
+FROM alpine:3.17.3 AS standard
 
 RUN set -ex; \
     apk add --no-cache \
