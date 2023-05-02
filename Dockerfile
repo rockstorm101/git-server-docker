@@ -2,7 +2,7 @@ FROM alpine:3.17.3 AS standard
 
 RUN set -ex; \
     apk add --no-cache \
-        git=2.38.4-r1 \
+        git=2.38.5-r0 \
         openssh=9.1_p1-r2 \
     ;
 
