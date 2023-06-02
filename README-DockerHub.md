@@ -31,7 +31,6 @@ README][2]:
  - Use SSH public keys
  - Setup custom host SSH keys
  - Enable Git URLs without an absolute path
- - Enable Docker CLI to run other CI/CD containers
  - Disable git user interactive login
  - Set git user UID and GID
 
