@@ -3,7 +3,7 @@ FROM alpine:3.19.0
 RUN set -ex; \
     apk add --no-cache \
         git=2.43.0-r0 \
-        openssh=9.5_p1-r0 \
+        openssh=9.6_p1-r0 \
     ;
 
 # Generate SSH host keys
