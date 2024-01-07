@@ -55,6 +55,13 @@ else
     warn "Directory '${GIT_REPOSITORIES_PATH}' not found."
 fi
 
+# Fetch an `authorized_keys` file from an URL if provided
+if [ -n "${SSH_AUTHORIZED_KEYS_URL-}" ]; then
+    mkdir -p "${GIT_HOME}/.ssh"
+    wget -q -O "${SSH_AUTHORIZED_KEYS_FILE}" "${SSH_AUTHORIZED_KEYS_URL}" || \
+        warn "Failed to fetch authorized keys from URL."
+fi
+
 # Make the git user the owner of his home directory
 # Required by the SSH server to allow public key login
 if [ -f "${SSH_AUTHORIZED_KEYS_FILE}" ]; then
