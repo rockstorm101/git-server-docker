@@ -75,10 +75,10 @@ docker run --detach \
   rockstorm/git-server
 ```
 
-To avoid specifying your password on the command line or on your
-compose file, you can load it from a file using the
-`GIT_PASSWORD_FILE`. This variable must be set to the file within the
-container to load the password from.
+To avoid specifying your password on the command line or on your compose file,
+you can load it from a file using the `GIT_PASSWORD_FILE` variable. This
+variable must be set to the file within the container to load the password
+from.
 
 ```shell
 docker run --detach \
@@ -90,7 +90,7 @@ docker run --detach \
   rockstorm/git-server
 ```
 
-Or making use of Docker secrets on your docker-compose.yml file:
+Or making use of a `docker-compose.yml` file:
 
 ```yaml
 services:
@@ -98,20 +98,16 @@ services:
     ...
     environment:
       GIT_PASSWORD_FILE: /run/secrets/git_password
-    secrets:
-      - git_password
-secrets:
-  git_password:
-    file: /path/to/password/file
+	volumes:
+	- /path/to/password/file:/run/secrets/git_password:ro
 ```
 
 
 Advanced Configuration
 ----------------------
-A [sample `docker-compose.yml`][1] is provided with all available
-options to use with docker-compose.
+A [sample `docker-compose.yml`](examples/docker-compose.yml) is provided with
+all available options to use with `docker-compose`.
 
-[1]: https://github.com/rockstorm101/git-server-docker/blob/master/examples/docker-compose.yml
 
 ### Use SSH public keys
 
