@@ -132,6 +132,21 @@ and mount it as detailed above.
 [1]: https://git-scm.com/book/en/v2/Git-on-the-Server-Generating-Your-SSH-Public-Key
 
 
+#### Use SSH public keys stored online
+
+You can use a set of keys stored somewhere online using the
+`SSH_AUTHORIZED_KEYS_URL` variable like:
+
+```shell
+docker run --detach \
+  --name git-server \
+  --volume git-repositories:/srv/git \
+  --env SSH_AUTHORIZED_KEYS_URL=https://github.com/username.keys \
+  --publish 2222:22 \
+  rockstorm/git-server
+```
+
+
 #### Disable password log in
 
 By default, the git user is allowed to log in using either SSH public key

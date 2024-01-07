@@ -22,6 +22,9 @@ services:
       # to access repositories without absolute paths
       # REPOSITORIES_HOME_LINK: /srv/git
 
+      # Fetch an `authorized_keys` file form an online location
+      # SSH_AUTHORIZED_KEYS_URL: https://github.com/username.keys
+
       # Set the allowed authentication methods
       # SSH_AUTH_METHODS: "publickey keyboard-interactive"
 
