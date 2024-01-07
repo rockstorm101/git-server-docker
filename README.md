@@ -8,12 +8,9 @@ Simple Docker image containing a Git server accessible via SSH.
 
 - [Usage](#usage)
   * [Basic Use Case](#basic-use-case)
-    + [Create a New Repository](#create-a-new-repository)
   * [Use a Custom Password](#use-a-custom-password)
 - [Advanced configuration](#advanced-configuration)
   * [Use SSH public keys](#use-ssh-public-keys)
-    + [Create Authorised Keys File](#create-authorised-keys-file)
-    + [Allow Both SSH Public Key and Password](#allow-both-ssh-public-key-and-password)
   * [Custom SSH Host Keys](#custom-ssh-host-keys)
   * [Enable Git URLs Without Absolute Path](#enable-git-urls-without-absolute-path)
   * [Disable Git User Interactive Login](#disable-git-user-interactive-login)
@@ -111,29 +108,9 @@ all available options to use with `docker-compose`.
 
 ### Use SSH public keys
 
-The most secure option is to disable clear text passwords completely
-and only allow connections via SSH public keys.
-
-First, set to 'no' the following option on the [sample `sshd_config`][2]:
-
-```
-PasswordAuthentication no
-```
-
-Second, mount your custom `sshd_config`. Via docker-compose.yml is
-done like:
-
-```yaml
-services:
-  git-server:
-    ...
-    volumes:
-      - ./examples/sshd_config:/etc/ssh/sshd_config:ro
-```
-
-Third, you need to mount the file with SSH authentication keys for
-the users that will be allowed to interact with the server. These are
-set in the docker-compose.yml file as:
+Simply mount the file with the SSH authentication keys for the users that will
+be allowed to interact with the server. These are set in the
+`docker-compose.yml` file as:
 
 ```yaml
 services:
@@ -143,26 +120,57 @@ services:
       - /path/to/authorized_keys:/home/git/.ssh/authorized_keys
 ```
 
-[2]: https://github.com/rockstorm101/git-server-docker/blob/master/examples/sshd_config
 
-#### Create Authorised Keys File
+#### Create an authorized keys file
 
-SSH key generation for your client machine to connect to the
-server is detailed in depth on [Git's book Chapter 4.3][3].
+SSH key generation for your client machine to connect to the server is
+detailed in depth on [Git's book Chapter 4.3][1].
 
-Then simply copy the contents of all allowed clients' `id_*.pub` into
-a file and mount it as detailed above.
+Then, simply copy the contents of all allowed clients' `id_*.pub` into a file
+and mount it as detailed above.
 
-[3]: https://git-scm.com/book/en/v2/Git-on-the-Server-Generating-Your-SSH-Public-Key
+[1]: https://git-scm.com/book/en/v2/Git-on-the-Server-Generating-Your-SSH-Public-Key
 
-#### Allow Both SSH Public Key and Password
 
-Add the following line to your `sshd_config` to allow either a public
-key login _or_ a password login:
+#### Disable password log in
 
+By default, the git user is allowed to log in using either SSH public key
+_or_ a password. To disable clear text passwords completely and only allow
+connections via SSH public keys, set to 'publickey' the `SSH_AUTH_METHODS`
+variable:
+
+```yaml
+services:
+  git-server:
+    ...
+    environment:
+      SSH_AUTH_METHODS: "publickey"
 ```
-AuthenticationMethods publickey password
+
+The `SSH_AUTH_METHODS` variable effectively sets the 'AuthenticationMethods'
+variable within the SSH server configuration file. Therefore, it can be set to
+any value allowed by it. See [OpenSSH server documentation][2] for more
+information. Example values for `SSH_AUTH_METHODS`:
+
+| Value                | Authentication method(s) allowed        |
+|----------------------|-----------------------------------------|
+| 'publickey'          | SSH public key only                     |
+| 'publickey password' | SSH public key _or_ password            |
+| 'publickey,password' | SSH public key _followed by_ a password |
+
+Of course, you can also mount your custom configuration file for the SSH
+server at `/etc/ssh/sshd_config` for better fine tuning. The default
+configuration is provided at [`examples/sshd_config`](examples/sshd_config).
+
+```yaml
+services:
+  git-server:
+    ...
+	volumes:
+      - examples/sshd_config:/etc/ssh/sshd_config:ro
 ```
+
+[2]: https://man.openbsd.org/sshd_config#AuthenticationMethods
 
 
 ### Custom SSH Host Keys
@@ -290,7 +298,7 @@ will stop immediately after starting.
 
 To have unauthenticated read access to your repositories through HTTP
 and visualize them you can run a webserver along this image. One
-example of such a webserver is [this GitWeb image][4]. You just need
+example of such a webserver is [this GitWeb image][3]. You just need
 to mount the folder/volume with your repositories on both containers
 at the relevant locations.
 
@@ -309,12 +317,12 @@ services:
       - ./path/to/repos:/srv/git:ro
 ```
 
-[4]: https://github.com/rockstorm101/gitweb-docker
+[3]: https://github.com/rockstorm101/gitweb-docker
 
 
 Variants
 --------
-All images are based on the latest stable image of [Alpine Linux][5].
+All images are based on the latest stable image of [Alpine Linux][4].
 
 ### `git-server:<git-version>`
 
@@ -324,10 +332,10 @@ Default image. It contains just git and SSH.
 
 This image used to include the Docker CLI. This variant is now
 deprecated in favor of running a CI/CD service separate from this
-image. For example, see [Bash CI Server][6].
+image. For example, see [Bash CI Server][5].
 
-[5]: https://hub.docker.com/_/alpine
-[6]: https://github.com/rockstorm101/bash-ci-server
+[4]: https://hub.docker.com/_/alpine
+[5]: https://github.com/rockstorm101/bash-ci-server
 
 
 Tagging Scheme
@@ -346,7 +354,7 @@ Tagging Scheme
 
 License
 -------
-View [license information][7] for the software contained in this
+View [license information][6] for the software contained in this
 image.
 
 As with all Docker images, these likely also contain other software
@@ -358,22 +366,22 @@ As for any pre-built image usage, it is the image user's
 responsibility to ensure that any use of this image complies with any
 relevant licenses for all software contained within.
 
-[7]: https://github.com/rockstorm101/git-server-docker/blob/master/LICENSE
+[6]: https://github.com/rockstorm101/git-server-docker/blob/master/LICENSE
 
 Credits
 -------
-Re-implementation heavily based on [jkarlosb's][8] but coded from
+Re-implementation heavily based on [jkarlosb's][7] but coded from
 scratch.
 
-Table of contents on this README was generated with [markdown-toc][9].
+Table of contents on this README was generated with [markdown-toc][8].
 
-[8]: https://github.com/jkarlosb/git-server-docker
-[9]: http://ecotrust-canada.github.io/markdown-toc
+[7]: https://github.com/jkarlosb/git-server-docker
+[8]: http://ecotrust-canada.github.io/markdown-toc
 
 
-[^1]: How it works and more information are discussed at [SO][10].
+[^1]: How it works and more information are discussed at [SO][9].
 
-[10]: https://stackoverflow.com/a/39841058
+[9]: https://stackoverflow.com/a/39841058
 
 
 [b1]: https://img.shields.io/github/actions/workflow/status/rockstorm101/git-server-docker/test-build.yml?branch=master

@@ -22,6 +22,9 @@ services:
       # to access repositories without absolute paths
       # REPOSITORIES_HOME_LINK: /srv/git
 
+      # Set the allowed authentication methods
+      # SSH_AUTH_METHODS: "publickey keyboard-interactive"
+
       # Path where the SSH host keys will be mounted in the container
       # in order to replace the default keys
       # SSH_HOST_KEYS_PATH: /tmp/host-keys
