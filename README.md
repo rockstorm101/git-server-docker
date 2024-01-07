@@ -95,8 +95,8 @@ services:
     ...
     environment:
       GIT_PASSWORD_FILE: /run/secrets/git_password
-	volumes:
-	- /path/to/password/file:/run/secrets/git_password:ro
+    volumes:
+    - /path/to/password/file:/run/secrets/git_password:ro
 ```
 
 
@@ -166,7 +166,7 @@ configuration is provided at [`examples/sshd_config`](examples/sshd_config).
 services:
   git-server:
     ...
-	volumes:
+    volumes:
       - examples/sshd_config:/etc/ssh/sshd_config:ro
 ```
 
