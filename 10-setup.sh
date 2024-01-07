@@ -79,8 +79,8 @@ fi
 # Configure the SSH server configuration file
 SSHD_CONFIG_FILE='/etc/ssh/sshd_config'
 if [ -n "${SSH_AUTH_METHODS-}" ]; then
-	sed -i "s/.*AuthenticationMethods.*//g" ${SSHD_CONFIG_FILE}
-	echo "AuthenticationMethods ${SSH_AUTH_METHODS}" >> ${SSHD_CONFIG_FILE}
+    sed -i "s/.*AuthenticationMethods.*//g" ${SSHD_CONFIG_FILE}
+    echo "AuthenticationMethods ${SSH_AUTH_METHODS}" >> ${SSHD_CONFIG_FILE}
 fi
 
 # Link the repositories folder on git user's home directory
