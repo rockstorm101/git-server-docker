@@ -1,4 +1,5 @@
-# Git Server Docker
+Git Server Docker
+=================
 [![Test Build Status][b1]][bl]
 [![Docker Image Size][b2]][bl]
 [![Docker Pulls][b3]][bl]
@@ -25,8 +26,8 @@ Simple Docker image containing a Git server accessible via SSH.
 - [Credits](#credits)
 
 
-## Usage
-
+Usage
+-----
 ### Basic Use Case
 
 ```
@@ -105,8 +106,8 @@ secrets:
 ```
 
 
-## Advanced configuration
-
+Advanced Configuration
+----------------------
 A [sample `docker-compose.yml`][1] is provided with all available
 options to use with docker-compose.
 
@@ -315,8 +316,8 @@ services:
 [4]: https://github.com/rockstorm101/gitweb-docker
 
 
-## Variants
-
+Variants
+--------
 All images are based on the latest stable image of [Alpine Linux][5].
 
 ### `git-server:<git-version>`
@@ -333,8 +334,8 @@ image. For example, see [Bash CI Server][6].
 [6]: https://github.com/rockstorm101/bash-ci-server
 
 
-## Tagging Scheme
-
+Tagging Scheme
+--------------
  - **'X.Y-bZ'**: Immutable tag. Points to a specific image build and will
    not be reused.
 
@@ -347,8 +348,8 @@ image. For example, see [Bash CI Server][6].
    major/minor versions.
 
 
-## License
-
+License
+-------
 View [license information][7] for the software contained in this
 image.
 
@@ -363,8 +364,8 @@ relevant licenses for all software contained within.
 
 [7]: https://github.com/rockstorm101/git-server-docker/blob/master/LICENSE
 
-## Credits
-
+Credits
+-------
 Re-implementation heavily based on [jkarlosb's][8] but coded from
 scratch.
 
