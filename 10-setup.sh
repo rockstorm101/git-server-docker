@@ -77,6 +77,8 @@ if [ -n "${SSH_HOST_KEYS_PATH-}" ]; then
         cd /etc/ssh
         rm -rf ssh_host_*
         cp "${SSH_HOST_KEYS_PATH}"/ssh_host_* .
+        chmod 600 ssh_host_*
+        chmod 644 ssh_host_*.pub
     else
         warn "Directory '${SSH_HOST_KEYS_PATH}' not found."
         warn "Default SSH host keys will be used instead."
