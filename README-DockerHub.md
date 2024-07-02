@@ -45,6 +45,15 @@ See [Variants][5] and [Tagging Scheme][6].
 [6]: https://github.com/rockstorm101/git-server-docker#tagging-scheme
 
 
+## Security Warning
+
+The default host keys are generated during image build and are the same for every container which uses this image.
+This is a security risk and therefore the use of a custom set of keys is highly recommended.
+This will also ensure keys are persistent if the image is upgraded.
+
+[7]: https://github.com/rockstorm101/git-server-docker#custom-ssh-host-keys
+
+
 ## License
 
 View [license information][7] for the software contained in this
