@@ -215,7 +215,7 @@ services:
 
 ### Enable Git URLs Without Absolute Path
 
-By default, git URLs to you repositories will be in the form of:
+By default, git URLs to your repositories will be in the form of:
 
 ```
 git clone ssh://git@example.com:2222/srv/git/project/repository.git
