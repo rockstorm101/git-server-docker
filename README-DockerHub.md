@@ -23,10 +23,17 @@ git clone ssh://git@localhost:2222/srv/git/your-repo.git
 The default password for the git user is `12345`.
 
 
+Security Notice
+---------------
+Exposing this server to the internet has security implications. This image's
+configuration is not secure by default. Please read the security
+recommendations at the [source README][2] carefully.
+
+
 ## Other Features
 
-The image allows much more use cases which are detailed in the [source
-README][2]:
+The image allows several customization features which are detailed in the
+[source README][2] like:
  - Setup custom passwords
  - Use SSH public keys
  - Setup custom host SSH keys
