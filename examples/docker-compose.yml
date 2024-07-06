@@ -14,14 +14,6 @@ services:
       # mounted in the container in order to replace the default one
       # GIT_PASSWORD_FILE: /run/secrets/git_password
 
-      # Set specific UID and GID for the git user
-      # GIT_USER_UID: 1001
-      # GIT_USER_GID: 1001
-
-      # Setting this variable creates a link in the git user directory
-      # to access repositories without absolute paths
-      # REPOSITORIES_HOME_LINK: /srv/git
-
       # Fetch an `authorized_keys` file form an online location
       # SSH_AUTHORIZED_KEYS_URL: https://github.com/username.keys
 
@@ -31,6 +23,14 @@ services:
       # Path where the SSH host keys will be mounted in the container
       # in order to replace the default keys
       # SSH_HOST_KEYS_PATH: /tmp/host-keys
+
+      # Setting this variable creates a link in the git user directory
+      # to access repositories without absolute paths
+      # REPOSITORIES_HOME_LINK: /srv/git
+
+      # Set specific UID and GID for the git user
+      # GIT_USER_UID: 1001
+      # GIT_USER_GID: 1001
 
     volumes:
       # Folder with git repositories
