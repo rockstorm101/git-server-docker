@@ -1,9 +1,9 @@
-FROM alpine:3.21.2
+FROM alpine:3.21.3
 
 RUN set -ex; \
     apk add --no-cache \
         git=2.47.2-r0 \
-        openssh=9.9_p1-r2 \
+        openssh=9.9_p2-r0 \
     ;
 
 # Generate SSH host keys
