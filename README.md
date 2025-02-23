@@ -256,7 +256,7 @@ services:
   git-server:
     ...
     environment:
-      REPOSITORIES_HOME_LINK: /srv/git
+      REPOSITORIES_HOME_LINK: /srv/git/project
 ```
 
 To avoid specifying ports on git URLs you can configure your client
