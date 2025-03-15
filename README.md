@@ -184,6 +184,10 @@ services:
       - examples/sshd_config:/etc/ssh/sshd_config:ro
 ```
 
+> **NOTE**: If you mount a custom SSH server configuration file
+> (e.g. `/etc/ssh/sshd_config`), using `SSH_AUTH_METHODS` is discouraged since
+> it would try to rewrite such file.
+
 [2]: https://man.openbsd.org/sshd_config#AuthenticationMethods
 
 
