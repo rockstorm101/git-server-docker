@@ -10,6 +10,10 @@
 # possible, but leave them commented.  Uncommented options override the
 # default value.
 
+# Include configuration snippets before processing this file to allow the
+# snippets to override directives set in this file.
+Include /etc/ssh/sshd_config.d/*.conf
+
 #Port 22
 #AddressFamily any
 #ListenAddress 0.0.0.0
@@ -75,7 +79,7 @@ AuthorizedKeysFile	.ssh/authorized_keys
 # be allowed through the KbdInteractiveAuthentication and
 # PasswordAuthentication.  Depending on your PAM configuration,
 # PAM authentication via KbdInteractiveAuthentication may bypass
-# the setting of "PermitRootLogin without-password".
+# the setting of "PermitRootLogin prohibit-password".
 # If you just want the PAM account and session checks to run without
 # PAM authentication, then enable this but set PasswordAuthentication
 # and KbdInteractiveAuthentication to 'no'.
@@ -107,7 +111,7 @@ X11Forwarding no
 #Banner none
 
 # override default of no subsystems
-Subsystem	sftp	/usr/lib/ssh/sftp-server
+Subsystem	sftp	internal-sftp
 
 # Example of overriding settings on a per-user basis
 #Match User anoncvs
