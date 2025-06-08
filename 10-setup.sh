@@ -87,6 +87,8 @@ fi
 
 # Configure the SSH server configuration file
 SSHD_CONFIG_FILE='/etc/ssh/sshd_config'
+# Disable SFTP by commenting the Subsystem line
+sed -e '/^Subsystem/s/^/#/' -i ${SSHD_CONFIG_FILE}
 if [ -n "${SSH_AUTH_METHODS-}" ]; then
     if sed -i "s/.*AuthenticationMethods.*//g" ${SSHD_CONFIG_FILE}; then
         echo "AuthenticationMethods ${SSH_AUTH_METHODS}" >> ${SSHD_CONFIG_FILE}
