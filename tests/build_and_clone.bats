@@ -53,7 +53,7 @@ clone() {
     clone
 }
 
-@test "Read password from file (6798)" {
+@test "Read password from file (6789)" {
     tmp_file=$(mktemp)
 	echo "6789" > $tmp_file
     image_up --env GIT_PASSWORD_FILE="/run/secrets/git_password" \
